@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noticias — INFORME</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div class="barra-superior">
+    <div class="contenedor">
+      <span>PLATAFORMA WEB DE NOTICIAS</span>
+      <span id="fecha-hoy"></span>
+    </div>
+  </div>
+
+  <header class="encabezado">
+    <div class="contenedor">
+      <a href="index.html" class="logotipo">INFORME<small>NOTICIAS · COLOMBIA</small></a>
+      <nav class="nav-principal">
+        <a href="index.html">Home</a>
+        <a href="noticias.html">Noticias</a>
+        <a href="detalle.html">Detalle</a>
+        <a href="favoritos.html" class="boton-favoritos">Favoritos</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="seccion-titulo">
+        <h2>Todas las noticias</h2>
+      </div>
+
+      <div class="filtros">
+        <div class="filtros-categorias" id="filtros-categorias"></div>
+        <input type="search" id="buscador" class="buscador" placeholder="Buscar noticias..." />
+      </div>
+
+      <div class="grid-tarjetas" id="grid-noticias"></div>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <div>
+        <div class="pie-marca">INFORME</div>
+        <p>Plataforma web de noticias educativas, tecnológicas, turísticas y comerciales de Colombia.</p>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="noticias.html">Noticias</a></li>
+          <li><a href="favoritos.html">Favoritos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <p>contacto@informe.co<br />Bogotá, Colombia<br />+57 601 234 5678</p>
+      </div>
+    </div>
+    <div class="contenedor pie-final">
+      <span>© 2026 INFORME — Todos los derechos reservados</span>
+      <span>Proyecto Académico · Politécnico Grancolombiano</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById("fecha-hoy").textContent = new Date().toLocaleDateString("es-CO", {
+      weekday: "long", day: "2-digit", month: "short", year: "numeric"
+    }).toUpperCase();
+
+    inicializarListado();
+  </script>
+</body>
+</html>
