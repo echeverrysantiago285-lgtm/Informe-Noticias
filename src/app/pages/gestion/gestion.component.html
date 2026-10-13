@@ -1,0 +1,93 @@
+<section class="seccion">
+  <div class="contenedor">
+    <div class="seccion-titulo gestion-titulo">
+      <div>
+        <span class="etiqueta">MINI CRUD</span>
+        <h2>Gestión de noticias</h2>
+        <p>Publica nuevas noticias y elimina registros existentes. Los cambios se guardan en localStorage.</p>
+      </div>
+      <a routerLink="/noticias" class="boton boton-borde">Ver portal</a>
+    </div>
+
+    <div *ngIf="mensaje" class="mensaje-gestion" [class.error]="tipoMensaje === 'error'">
+      {{ mensaje }}
+    </div>
+
+    <div class="gestion-grid">
+      <form class="form-contacto gestion-form" #form="ngForm" (ngSubmit)="crear(form)" novalidate>
+        <h3>Crear noticia</h3>
+
+        <div class="gestion-dos-columnas">
+          <div class="campo">
+            <label for="g-categoria">Categoría</label>
+            <select id="g-categoria" name="categoria" [(ngModel)]="modelo.categoria" required>
+              <option>Tecnología</option>
+              <option>Educación</option>
+              <option>Turismo</option>
+              <option>Comercio</option>
+              <option>Cultura</option>
+              <option>Actualidad</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="g-fecha">Fecha</label>
+            <input id="g-fecha" type="date" name="fecha" [(ngModel)]="modelo.fecha" required />
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="g-titulo">Título</label>
+          <input id="g-titulo" name="titulo" [(ngModel)]="modelo.titulo" required minlength="5" placeholder="Título de la noticia" />
+        </div>
+
+        <div class="campo">
+          <label for="g-resumen">Descripción breve</label>
+          <textarea id="g-resumen" name="resumen" [(ngModel)]="modelo.resumen" required minlength="15" placeholder="Resumen que aparecerá en las tarjetas"></textarea>
+        </div>
+
+        <div class="campo">
+          <label for="g-cuerpo">Contenido completo</label>
+          <textarea id="g-cuerpo" class="textarea-alta" name="cuerpo" [(ngModel)]="modelo.cuerpo" required minlength="20" placeholder="Escribe uno o varios párrafos. Separa los párrafos con Enter."></textarea>
+        </div>
+
+        <div class="gestion-dos-columnas">
+          <div class="campo">
+            <label for="g-autor">Autor</label>
+            <input id="g-autor" name="autor" [(ngModel)]="modelo.autor" required minlength="3" />
+          </div>
+          <div class="campo">
+            <label for="g-tiempo">Tiempo de lectura (min)</label>
+            <input id="g-tiempo" type="number" name="tiempoLectura" [(ngModel)]="modelo.tiempoLectura" required min="1" max="60" />
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="g-imagen">Semilla de imagen</label>
+          <input id="g-imagen" name="imagen" [(ngModel)]="modelo.imagen" placeholder="Ejemplo: noticia-medellin" />
+        </div>
+
+        <button type="submit" class="boton boton-primario" style="width:100%;">Publicar noticia</button>
+      </form>
+
+      <div class="gestion-listado">
+        <div class="gestion-listado-cabecera">
+          <div>
+            <h3>Noticias registradas</h3>
+            <span>{{ noticias.length }} registro(s)</span>
+          </div>
+          <button type="button" class="boton boton-borde" (click)="restablecer()">Restablecer</button>
+        </div>
+
+        <article *ngFor="let n of noticias" class="gestion-item">
+          <img [src]="noticiasService.urlImagen(n.imagen, 120, 90)" [alt]="n.titulo" />
+          <div>
+            <span class="etiqueta">{{ n.categoria.toUpperCase() }}</span>
+            <h4>{{ n.titulo }}</h4>
+            <small>{{ n.autor }} · {{ noticiasService.formatearFecha(n.fecha) }}</small>
+          </div>
+          <button type="button" class="boton boton-peligro" (click)="eliminar(n)">Eliminar</button>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

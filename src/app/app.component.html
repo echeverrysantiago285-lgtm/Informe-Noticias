@@ -1,0 +1,49 @@
+<div class="barra-superior">
+  <div class="contenedor">
+    <span>PLATAFORMA WEB DE NOTICIAS</span>
+    <span>{{ fechaHoy }}</span>
+  </div>
+</div>
+
+<header class="encabezado">
+  <div class="contenedor">
+    <a routerLink="/" class="logotipo">INFORME<small>NOTICIAS · COLOMBIA</small></a>
+    <nav class="nav-principal">
+      <a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a routerLink="/noticias" routerLinkActive="activo">Noticias</a>
+      <a routerLink="/detalle" routerLinkActive="activo">Detalle</a>
+      <a routerLink="/contacto" routerLinkActive="activo">Contacto</a>
+      <a routerLink="/gestion" routerLinkActive="activo">Gestión</a>
+      <a routerLink="/favoritos" routerLinkActive="activo" class="boton-favoritos">Favoritos</a>
+    </nav>
+  </div>
+</header>
+
+<router-outlet></router-outlet>
+
+<footer class="pie">
+  <div class="contenedor">
+    <div>
+      <div class="pie-marca">INFORME</div>
+      <p>Plataforma web de noticias educativas, tecnológicas, turísticas y comerciales de Colombia.</p>
+    </div>
+    <div>
+      <h4>Navegación</h4>
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/noticias">Noticias</a></li>
+        <li><a routerLink="/favoritos">Favoritos</a></li>
+        <li><a routerLink="/gestion">Gestión</a></li>
+        <li><a routerLink="/contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <p>contacto&#64;informe.co<br />Bogotá, Colombia<br />+57 601 234 5678</p>
+    </div>
+  </div>
+  <div class="contenedor pie-final">
+    <span>&#169; 2026 INFORME — Todos los derechos reservados</span>
+    <span>Proyecto Académico · Politécnico Grancolombiano</span>
+  </div>
+</footer>

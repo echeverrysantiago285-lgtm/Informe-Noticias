@@ -1,0 +1,34 @@
+<section class="seccion">
+  <div class="contenedor">
+    <div class="seccion-titulo">
+      <h2>Todas las noticias</h2>
+    </div>
+
+    <div class="filtros">
+      <div class="filtros-categorias">
+        <button
+          *ngFor="let cat of categorias"
+          class="chip"
+          [class.activo]="cat === categoriaActiva"
+          (click)="seleccionarCategoria(cat)"
+        >
+          {{ cat }}
+        </button>
+      </div>
+      <input
+        type="search"
+        class="buscador"
+        placeholder="Buscar noticias..."
+        [(ngModel)]="textoBusqueda"
+        (ngModelChange)="aplicarFiltros()"
+      />
+    </div>
+
+    <div class="grid-tarjetas" *ngIf="noticiasFiltradas.length > 0; else sinResultados">
+      <app-noticia-card *ngFor="let n of noticiasFiltradas" [noticia]="n"></app-noticia-card>
+    </div>
+    <ng-template #sinResultados>
+      <div class="estado-vacio">No se encontraron noticias con los filtros seleccionados.</div>
+    </ng-template>
+  </div>
+</section>

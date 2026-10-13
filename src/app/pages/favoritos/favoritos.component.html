@@ -1,0 +1,26 @@
+<section class="seccion">
+  <div class="contenedor">
+    <div class="seccion-titulo">
+      <h2>Mis favoritos</h2>
+    </div>
+    <p style="color:var(--gris-medio); font-size:0.88rem; margin-top:-10px;">
+      Guarda esta noticia para leerla más tarde. Tus favoritos se guardan únicamente en este navegador.
+    </p>
+
+    <div class="lista-favoritos" *ngIf="noticiasFavoritas.length > 0; else sinFavoritos">
+      <app-noticia-card
+        *ngFor="let n of noticiasFavoritas"
+        [noticia]="n"
+        [modoFavoritos]="true"
+        (quitar)="quitarFavorito($event)"
+      ></app-noticia-card>
+    </div>
+
+    <ng-template #sinFavoritos>
+      <div class="estado-vacio">
+        Aún no has guardado noticias en favoritos.<br />
+        <a class="boton boton-primario" style="margin-top:14px;" routerLink="/noticias">Explorar noticias</a>
+      </div>
+    </ng-template>
+  </div>
+</section>

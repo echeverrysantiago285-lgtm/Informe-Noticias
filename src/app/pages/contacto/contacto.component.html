@@ -1,0 +1,75 @@
+<section class="seccion">
+  <div class="contenedor">
+    <div class="seccion-titulo" style="justify-content:center; text-align:center; flex-direction:column;">
+      <h2>Contáctanos</h2>
+      <p style="color:var(--gris-medio); font-size:0.9rem; margin-top:6px;">
+        ¿Tienes una noticia, una corrección o quieres anunciarte con nosotros? Escríbenos.
+      </p>
+    </div>
+
+    <div class="confirmacion" [class.visible]="envioExitoso">{{ mensajeConfirmacion }}</div>
+
+    <form class="form-contacto" #form="ngForm" (ngSubmit)="enviar(form)" novalidate>
+      <div class="campo" [class.invalido]="nombre.invalid && (nombre.dirty || nombre.touched || form.submitted)">
+        <label for="campo-nombre">Nombre completo</label>
+        <input
+          type="text"
+          id="campo-nombre"
+          name="nombre"
+          placeholder="Escribe tu nombre"
+          [(ngModel)]="modelo.nombre"
+          #nombre="ngModel"
+          required
+          minlength="3"
+        />
+        <span class="mensaje-error">Ingresa tu nombre completo (mínimo 3 caracteres).</span>
+      </div>
+
+      <div class="campo" [class.invalido]="correo.invalid && (correo.dirty || correo.touched || form.submitted)">
+        <label for="campo-correo">Correo electrónico</label>
+        <input
+          type="email"
+          id="campo-correo"
+          name="correo"
+          placeholder="tucorreo@ejemplo.com"
+          [(ngModel)]="modelo.correo"
+          #correo="ngModel"
+          required
+          email
+        />
+        <span class="mensaje-error">Ingresa un correo electrónico válido.</span>
+      </div>
+
+      <div class="campo" [class.invalido]="asunto.invalid && (asunto.dirty || asunto.touched || form.submitted)">
+        <label for="campo-asunto">Asunto</label>
+        <input
+          type="text"
+          id="campo-asunto"
+          name="asunto"
+          placeholder="¿Sobre qué quieres escribirnos?"
+          [(ngModel)]="modelo.asunto"
+          #asunto="ngModel"
+          required
+          minlength="3"
+        />
+        <span class="mensaje-error">Ingresa un asunto (mínimo 3 caracteres).</span>
+      </div>
+
+      <div class="campo" [class.invalido]="mensaje.invalid && (mensaje.dirty || mensaje.touched || form.submitted)">
+        <label for="campo-mensaje">Mensaje</label>
+        <textarea
+          id="campo-mensaje"
+          name="mensaje"
+          placeholder="Cuéntanos los detalles..."
+          [(ngModel)]="modelo.mensaje"
+          #mensaje="ngModel"
+          required
+          minlength="10"
+        ></textarea>
+        <span class="mensaje-error">Escribe un mensaje de al menos 10 caracteres.</span>
+      </div>
+
+      <button type="submit" class="boton boton-primario" style="width:100%;">Enviar mensaje</button>
+    </form>
+  </div>
+</section>

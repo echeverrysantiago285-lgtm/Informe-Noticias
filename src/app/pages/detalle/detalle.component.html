@@ -1,0 +1,55 @@
+<section class="seccion" *ngIf="noticia; else sinNoticia">
+  <div class="contenedor detalle-grid">
+    <article class="detalle-articulo">
+      <span class="etiqueta">{{ noticia.categoria.toUpperCase() }}</span>
+      <h1>{{ noticia.titulo }}</h1>
+      <div class="detalle-meta">
+        <div class="avatar">{{ noticia.autor.charAt(0) }}</div>
+        <div>
+          <strong>{{ noticia.autor }}</strong><br />
+          Redacción INFORME
+        </div>
+        <span>{{ noticiasService.formatearFecha(noticia.fecha) }} · Lectura: {{ noticia.tiempoLectura }} min</span>
+        <div class="detalle-acciones">
+          <button
+            class="boton"
+            [class.boton-primario]="esFavorita"
+            [class.boton-borde]="!esFavorita"
+            (click)="alternarFavorito()"
+          >
+            {{ esFavorita ? '★ Guardado en favoritos' : '☆ Guardar' }}
+          </button>
+          <a class="boton boton-borde" routerLink="/contacto">✉ Compartir</a>
+        </div>
+      </div>
+
+      <img class="detalle-imagen" [src]="noticiasService.urlImagen(noticia.imagen, 900, 450)" [alt]="noticia.titulo" />
+
+      <p *ngFor="let parrafo of noticia.cuerpo">{{ parrafo }}</p>
+    </article>
+
+    <aside>
+      <div class="recuadro recuadro-alerta">
+        <h4>¿Tienes información?</h4>
+        <p>Comparte datos, denuncias o correcciones con nuestro equipo editorial.</p>
+        <a routerLink="/contacto" class="boton" style="background:#fff;color:var(--rojo);">Contactar redacción</a>
+      </div>
+
+      <div class="recuadro">
+        <h4>También te puede interesar</h4>
+        <a *ngFor="let r of relacionadas" class="recomendada" [routerLink]="['/detalle', r.id]">
+          <img [src]="noticiasService.urlImagen(r.imagen, 100, 100)" [alt]="r.titulo" />
+          <h5>{{ r.titulo }}</h5>
+        </a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<ng-template #sinNoticia>
+  <div class="contenedor">
+    <div class="estado-vacio">
+      No se encontró la noticia solicitada. <a routerLink="/noticias">Volver al listado</a>.
+    </div>
+  </div>
+</ng-template>

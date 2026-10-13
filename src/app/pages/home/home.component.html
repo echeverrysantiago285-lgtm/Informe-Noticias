@@ -1,0 +1,86 @@
+<ng-container *ngIf="destacada; else sinNoticias">
+  <section class="hero">
+    <div class="contenedor hero-grid">
+      <div class="hero-principal" [style.background-image]="'url(' + noticiasService.urlImagen(destacada.imagen, 900, 500) + ')'">
+        <div class="hero-texto">
+          <span class="etiqueta">{{ destacada.categoria.toUpperCase() }}</span>
+          <h1>{{ destacada.titulo }}</h1>
+          <p>{{ destacada.resumen }}</p>
+          <div class="hero-meta">
+            <span>{{ destacada.autor }} · {{ noticiasService.formatearFecha(destacada.fecha) }}</span>
+            <a class="boton boton-primario" [routerLink]="['/detalle', destacada.id]">Ver más →</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel-lateral">
+        <h3>Últimas noticias</h3>
+        <div *ngFor="let n of ultimas" class="item-lateral">
+          <img [src]="noticiasService.urlImagen(n.imagen, 100, 100)" [alt]="n.titulo" loading="lazy" />
+          <div>
+            <span class="etiqueta">{{ n.categoria.toUpperCase() }}</span>
+            <h4><a [routerLink]="['/detalle', n.id]">{{ n.titulo }}</a></h4>
+            <time>{{ noticiasService.formatearFecha(n.fecha) }}</time>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="banda-cta">
+    <div class="contenedor">
+      <div>
+        <h2>Tu fuente de noticias educativas, tecnológicas y culturales</h2>
+        <p>Explora el contenido de demostración disponible en la plataforma.</p>
+      </div>
+      <a routerLink="/noticias" class="boton boton-primario">Explorar todas →</a>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="seccion-titulo">
+        <h2>Noticias destacadas</h2>
+        <a routerLink="/noticias">Ver todas →</a>
+      </div>
+      <div class="grid-tarjetas">
+        <app-noticia-card *ngFor="let n of destacadas" [noticia]="n"></app-noticia-card>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" style="background:var(--gris-claro);">
+    <div class="contenedor">
+      <div class="seccion-titulo">
+        <h2>Sección informativa</h2>
+      </div>
+      <div class="grid-testimonios">
+        <div class="testimonio">
+          <p>Consulta noticias organizadas por categorías y utiliza el buscador para localizar contenidos.</p>
+          <strong>Exploración</strong>
+          <span>Listado dinámico</span>
+        </div>
+        <div class="testimonio">
+          <p>Guarda contenidos de interés y consúltalos posteriormente desde la sección de favoritos.</p>
+          <strong>Interacción</strong>
+          <span>Persistencia local</span>
+        </div>
+        <div class="testimonio">
+          <p>Usa el módulo de gestión para crear o eliminar noticias durante la demostración del mini CRUD.</p>
+          <strong>Administración</strong>
+          <span>Mini CRUD</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-container>
+
+<ng-template #sinNoticias>
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="estado-vacio">
+        No hay noticias disponibles. <a routerLink="/gestion">Ir a Gestión</a> para crear una.
+      </div>
+    </div>
+  </section>
+</ng-template>

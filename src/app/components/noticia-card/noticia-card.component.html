@@ -1,0 +1,15 @@
+<article class="tarjeta">
+  <img [src]="noticiasService.urlImagen(noticia.imagen)" [alt]="noticia.titulo" loading="lazy" />
+  <div class="tarjeta-cuerpo">
+    <span class="etiqueta">{{ noticia.categoria.toUpperCase() }}</span>
+    <h3>{{ noticia.titulo }}</h3>
+    <p>{{ noticia.resumen }}</p>
+    <div class="tarjeta-meta">
+      <span>{{ noticia.autor }} · {{ noticiasService.formatearFecha(noticia.fecha) }}</span>
+      <a [routerLink]="['/detalle', noticia.id]">Ver más →</a>
+    </div>
+    <button *ngIf="modoFavoritos" class="boton-quitar" (click)="quitar.emit(noticia.id)">
+      Quitar de favoritos
+    </button>
+  </div>
+</article>
